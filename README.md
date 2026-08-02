@@ -16,7 +16,7 @@ Blockchain-Enabled Cross-Border E-Commerce Supply Chain
 ### Arya
 System Model, Equilibria and Linearisation
 
-### Buraporn
+### Baimon
 Stability, Controllability and State-Feedback Control
 
 ### Clarence
