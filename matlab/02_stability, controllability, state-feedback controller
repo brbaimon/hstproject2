@@ -1,0 +1,68 @@
+clc
+close all
+clear all
+syms lambda
+
+
+% System matrices
+A = [0.7552    0.1122    0.1020         0
+     0.1224    0.7756         0    0.1020
+     0.0012         0    0.8990         0
+     0         0.0011         0    0.8990];
+
+B = [0; 1; 0; 0];   
+
+
+
+%% =========================================================
+% Stability
+% ==========================================================
+
+n = size(A, 1);
+charEq = det(A - lambda*eye(n));
+charEq = simplify(charEq);
+eigenvalues = solve(charEq == 0, lambda);
+
+% Convert eif_vals to decimasl and rounds to 8 significant digits
+eig_vals = double(vpa(eigenvalues, 8));   
+
+
+disp('Eigenvalues:')
+disp(eig_vals)
+
+if all(abs(eig_vals) < 1)
+    disp('All eigenvalues satisfy |lambda| < 1')
+    disp('System is asymptotically stable (discrete-time, Lyapunov indirect method)')
+else
+    disp('System is NOT stable — at least one eigenvalue has |lambda| >= 1')
+end
+
+
+%% =========================================================
+% Controllability
+% ==========================================================
+
+Co = ctrb(A, B);
+n = size(A, 1);
+
+if rank(Co) == n
+    disp('System is controllable')
+else
+    disp('System is NOT controllable')
+end
+
+
+
+%% =========================================================
+% State-Feedback Controller
+% ==========================================================
+
+% Choose desired closed-loop pole locations
+% (must have n poles, matching size of A)
+desired_poles = [0.5, 0.4, 0.3, 0.2];  
+
+% Compute the state-feedback gain K
+K = place(A, B, desired_poles);
+
+% Verify closed-loop eigenvalues should match desired_poles
+closed_loop_eig = eig(A - B*K)
