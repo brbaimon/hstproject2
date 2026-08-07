@@ -1,0 +1,74 @@
+========================================
+              FINAL SUMMARY
+========================================
+
+Parameter Set:
+a = 10
+eta1 = 100
+eta2 = 100
+
+Equilibrium State:
+x* =
+[8.500842
+ 9.273646
+ 0.101010
+ 0.101010]
+
+Equilibrium Demands:
+q1* = 10.101010
+q2* = 10.101010
+
+Equilibrium Verification:
+||f(x*) - x*|| = 0.000000000000e+00
+
+Result:
+PASS — equilibrium residual is below 1e-8.
+
+Economic Feasibility:
+p1* = 8.500842
+p2* = 9.273646
+b1* = 0.101010
+b2* = 0.101010
+q1* = 10.101010
+q2* = 10.101010
+
+Result:
+PASS — all equilibrium states and demands are positive.
+
+Linearised A Matrix:
+
+A =
+[0.7552    0.1122    0.1020         0
+ 0.1224    0.7756         0    0.1020
+ 0.0012         0    0.8990         0
+      0    0.0011         0    0.8990]
+
+Input Matrix:
+
+B =
+[0
+ 1
+ 0
+ 0]
+
+Output Matrix:
+
+C =
+[1 0 0 0
+ 0 1 0 0]
+
+Direct Feedthrough Matrix:
+
+D =
+[0
+ 0]
+
+Final Linearised Model:
+
+Delta x(t+1) = A Delta x(t) + B Delta u(t)
+
+Delta y(t) = C Delta x(t) + D Delta u(t)
+
+========================================
+        END OF PART 1 RESULTS
+========================================
