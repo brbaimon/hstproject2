@@ -1,0 +1,16 @@
+Eigenvalues:
+    0.6473
+    0.8776
+    0.8995
+    0.9045
+
+All eigenvalues satisfy |lambda| < 1
+System is asymptotically stable (discrete-time, Lyapunov indirect method)
+System is controllable
+
+closed_loop_eig =
+
+    0.5000
+    0.4000
+    0.3000
+    0.2000
