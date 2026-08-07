@@ -19,7 +19,7 @@ System Model, Equilibria and Linearisation
 ### Clarence
 Stability, Controllability and State-Feedback Control
 
-### Bimon
+### Buraporn
 Observability, Observer and Nonlinear Simulations
 
 ## Repository Structure
