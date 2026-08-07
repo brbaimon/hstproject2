@@ -16,10 +16,10 @@ Blockchain-Enabled Cross-Border E-Commerce Supply Chain
 ### Arya
 System Model, Equilibria and Linearisation
 
-### Baimon
+### Clarence
 Stability, Controllability and State-Feedback Control
 
-### Clarence
+### Bimon
 Observability, Observer and Nonlinear Simulations
 
 ## Repository Structure
