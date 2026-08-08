@@ -23,19 +23,9 @@ charEq = det(A - lambda*eye(n));
 charEq = simplify(charEq);
 eigenvalues = solve(charEq == 0, lambda);
 
+
 % Convert eif_vals to decimasl and rounds to 8 significant digits
 eig_vals = double(vpa(eigenvalues, 8));   
-
-
-disp('Eigenvalues:')
-disp(eig_vals)
-
-if all(abs(eig_vals) < 1)
-    disp('All eigenvalues satisfy |lambda| < 1')
-    disp('System is asymptotically stable (discrete-time, Lyapunov indirect method)')
-else
-    disp('System is NOT stable — at least one eigenvalue has |lambda| >= 1')
-end
 
 
 %% =========================================================
@@ -57,12 +47,69 @@ end
 % State-Feedback Controller
 % ==========================================================
 
-% Choose desired closed-loop pole locations
-% (must have n poles, matching size of A)
-desired_poles = [0.5, 0.4, 0.3, 0.2];  
+% Use Linear Quadratic Regulator
+% Avoids guessing and naturally produces reasonable gains, 
+% since it explicitly penalizes large control effort
 
-% Compute the state-feedback gain K
-K = place(A, B, desired_poles);
-
-% Verify closed-loop eigenvalues should match desired_poles
+Q = eye(4);      % state error penalty
+R = 100;         % control effort penalty — increase this if K is still large
+K = dlqr(A, B, Q, R);
 closed_loop_eig = eig(A - B*K)
+
+
+
+
+fprintf('\n');
+fprintf('========================================\n');
+fprintf('              FINAL SUMMARY\n');
+fprintf('========================================\n');
+
+fprintf('\n--- System Matrices ---\n');
+fprintf('A =\n');
+disp(A)
+fprintf('B =\n');
+disp(B)
+
+fprintf('\n--- Stability Analysis ---\n');
+fprintf('Eigenvalues of A:\n');
+disp(eig_vals)
+if all(abs(eig_vals) < 1)
+    fprintf('Result: All eigenvalues satisfy |lambda| < 1\n');
+    fprintf('System is asymptotically stable (discrete-time, Lyapunov indirect method)\n');
+else
+    fprintf('Result: System is NOT stable — at least one |lambda| >= 1\n');
+end
+
+fprintf('\n--- Controllability Analysis ---\n');
+fprintf('Controllability matrix Co =\n');
+disp(Co)
+fprintf('Rank(Co) = %d (n = %d)\n', rank(Co), n);
+if rank(Co) == n
+    fprintf('Result: System is controllable\n');
+else
+    fprintf('Result: System is NOT controllable\n');
+end
+
+
+fprintf('\n--- State-Feedback Controller (LQR Design Weights) ---\n');
+fprintf('Q =\n');
+disp(Q)
+fprintf('R = %.4f\n', R);
+
+fprintf('\n--- State-Feedback Gain (dlqr) ---\n');
+fprintf('K =\n');
+disp(K)
+
+fprintf('\n--- Closed-Loop System ---\n');
+fprintf('A - B*K =\n');
+disp(A - B*K)
+
+fprintf('Closed-loop eigenvalues:\n');
+disp(closed_loop_eig)
+
+if all(abs(closed_loop_eig) < 1)
+    fprintf('Result: All closed-loop eigenvalues satisfy |lambda| < 1\n');
+    fprintf('Closed-loop system is asymptotically stable\n');
+else
+    fprintf('Result: Closed-loop system is NOT stable\n');
+end
