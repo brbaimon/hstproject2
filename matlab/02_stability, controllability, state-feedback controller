@@ -35,11 +35,7 @@ eig_vals = double(vpa(eigenvalues, 8));
 Co = ctrb(A, B);
 n = size(A, 1);
 
-if rank(Co) == n
-    disp('System is controllable')
-else
-    disp('System is NOT controllable')
-end
+
 
 
 
@@ -54,7 +50,7 @@ end
 Q = eye(4);      % state error penalty
 R = 100;         % control effort penalty — increase this if K is still large
 K = dlqr(A, B, Q, R);
-closed_loop_eig = eig(A - B*K)
+closed_loop_eig = eig(A - B*K);
 
 
 
