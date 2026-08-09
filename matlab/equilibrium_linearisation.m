@@ -572,3 +572,21 @@ disp(C)
 fprintf('========================================\n');
 fprintf('        END OF YOUR ASSIGNED PART\n');
 fprintf('========================================\n');
+
+%% =========================================================
+% STEP 16: SAVE RESULTS FOR DOWNSTREAM SCRIPTS
+% ==========================================================
+
+% Convert symbolic nonlinear update f(x,u) into a numeric function
+% handle, so your nonlinear simulation script can call it directly
+% without needing Symbolic Toolbox at runtime.
+F = matlabFunction(f, 'Vars', [p1 p2 b1 b2 u]);
+
+save('system_model.mat', ...
+    'A', 'B', 'C', 'D', ...
+    'x_star', 'u_star', ...
+    'p1_star', 'p2_star', 'b1_star', 'b2_star', ...
+    'q1_star', 'q2_star', ...
+    'F');
+
+fprintf('\nSaved system_model.mat with A, B, C, D, equilibrium values, and F (nonlinear map).\n');
