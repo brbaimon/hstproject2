@@ -110,3 +110,10 @@ if all(abs(closed_loop_eig) < 1)
 else
     fprintf('Result: Closed-loop system is NOT stable\n');
 end
+
+%% =========================================================
+% SAVE STATE-FEEDBACK RESULTS FOR DOWNSTREAM SCRIPTS
+% =========================================================
+save('system_model.mat', 'K', 'closed_loop_eig', '-append');
+
+fprintf('\nSaved K and closed_loop_eig to system_model.mat.\n');

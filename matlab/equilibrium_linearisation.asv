@@ -584,6 +584,5 @@ fprintf('========================================\n');
 F = matlabFunction(f, 'Vars', [p1 p2 b1 b2 u omega1 omega2 mu1 mu2]);
 save('system_model.mat', 'A','B','C','D','x_star','u_star', ...
      'p1_star','p2_star','b1_star','b2_star','q1_star','q2_star','F', '-append');
-save('system_model.mat', 'A_sym', 'B_sym', '-append');
 
 fprintf('\nSaved system_model.mat with A, B, C, D, equilibrium values, and F (nonlinear map).\n');
