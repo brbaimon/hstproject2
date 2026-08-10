@@ -40,13 +40,13 @@ The group added two elements not defined in the source paper:
 
 The work is split into three parts, run in sequence:
 
-| Order | File | Owner | Covers |
-|---|---|---|---|
-| 1 | `system_model.m` | Shetty Arya Dinesh / Buraporn Ruangchaem / Clarence Elvareta Kurniawan | System setup, symbolic demand/profit equations, interior equilibrium solve, linearisation (Jacobians `A`, `B`), output matrix `C`, saves `system_model.mat` |
-| 2 | `stability_feedback.m` | Shetty Arya Dinesh / Buraporn Ruangchaem / Clarence Elvareta Kurniawan | Open-loop stability (eigenvalues of `A`), controllability check, LQR state-feedback gain `K`, closed-loop stability — appends `K` to `system_model.mat` |
-| 3 | `observability_observer.m` | Bimon | Observability check (rank of `obsv(A,C)`), Luenberger observer gain `L` via pole placement |
-| 4 | `bifurcation_scan.m` | Bimon | Sweeps adjustment speed `ω` to locate stable / period-doubling / chaotic regions of the nonlinear system |
-| 5 | `nonlinear_simulation.m` | Bimon | Simulates the true nonlinear system `F` across stable, unstable, chaotic, and controlled regimes; regime-specific relinearisation and controller/observer redesign; full observer-based closed-loop pipeline on all four states |
+| Order | File | Covers |
+|---|---|---|
+| 1 | `system_model.m` | System setup, symbolic demand/profit equations, interior equilibrium solve, linearisation (Jacobians `A`, `B`), output matrix `C`, saves `system_model.mat` |
+| 2 | `stability_feedback.m` | Open-loop stability (eigenvalues of `A`), controllability check, LQR state-feedback gain `K`, closed-loop stability — appends `K` to `system_model.mat` |
+| 3 | `observability_observer.m` | Observability check (rank of `obsv(A,C)`), Luenberger observer gain `L` via pole placement |
+| 4 | `bifurcation_scan.m` | Sweeps adjustment speed `ω` to locate stable / period-doubling / chaotic regions of the nonlinear system |
+| 5 | `nonlinear_simulation.m` | Simulates the true nonlinear system `F` across stable, unstable, chaotic, and controlled regimes; regime-specific relinearisation and controller/observer redesign; full observer-based closed-loop pipeline on all four states |
 
 **Run order:** `system_model.m` → `stability_feedback.m` → (`observability_observer.m`, `bifurcation_scan.m`, `nonlinear_simulation.m` — these three only need `system_model.mat` to already exist).
 
