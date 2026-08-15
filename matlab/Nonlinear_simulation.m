@@ -130,4 +130,4 @@ legend('Nonlinear (stable regime)', 'Linear prediction')
 title('Nonlinear vs Linear near equilibrium')
 xlabel('t')
 
-saveas(gcf, 'fig3_nonlinear_vs_linear.png')
+% saveas(gcf, 'fig3_nonlinear_vs_linear.png')
