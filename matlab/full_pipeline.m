@@ -89,10 +89,10 @@ for i = 1:4
     xlabel('t')
 end
 sgtitle('Full Pipeline: True vs Estimated States under Observer-Based Control')
-saveas(gcf, 'fig5_pipeline_allstates.png')
+% saveas(gcf, 'fig5_pipeline_allstates.png')
 
 figure;
 plot(1:N, vecnorm(estimation_error_ctrl))
 title('Estimation Error Norm ||x - xhat|| (all states)')
 xlabel('t')
-saveas(gcf, 'fig6_pipeline_error.png')
+% saveas(gcf, 'fig6_pipeline_error.png')
