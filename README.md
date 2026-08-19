@@ -20,14 +20,14 @@ The group added two elements not defined in the source paper:
 
 The work is split into three parts, run in sequence:
 
-| Order | File | Owner | Covers |
-|---|---|---|---|
-| 1 | `equilibrium_linearisation.m` | Shetty Arya Dinesh, Clarence Elvareta Kurniawan | System setup, symbolic demand/profit equations, interior equilibrium solve, linearisation (Jacobians `A`, `B`), output matrix `C`, saves `system_model.mat` |
-| 2 | `Stability_Controllability_State_Feedback_Control.m` | Shetty Arya Dinesh, Clarence Elvareta Kurniawan | Open-loop stability (eigenvalues of `A`), Jury-criterion cross-check, controllability check, LQR state-feedback gain `K`, closed-loop stability — appends `K` to `system_model.mat` |
-| 3 | `observability.m` | Buraporn Ruangchaem | Observability check (rank of `obsv(A,C)`), Luenberger observer gain `L` via pole placement, linear closed-loop observer simulation |
-| 4 | `bifurcation_scan.m` | Buraporn Ruangchaem | Sweeps adjustment speed `ω` to locate stable / period-doubling / strongly aperiodic regions of the nonlinear system |
-| 5 | `Nonlinear_simulation.m` | Buraporn Ruangchaem | Simulates the true nonlinear system across stable, unstable, and strongly aperiodic regimes; regime-specific relinearisation and controller redesign (`K_unstable`) |
-| 6 | `full_pipeline.m` | Buraporn Ruangchaem | Full observer-based closed-loop pipeline on the true nonlinear system: regime-specific observer (`L_unstable`) estimating all four states from price measurements, controller acting only on the estimate |
+| Order | File | Covers |
+|---|---|---|
+| 1 | `equilibrium_linearisation.m` | System setup, symbolic demand/profit equations, interior equilibrium solve, linearisation (Jacobians `A`, `B`), output matrix `C`, saves `system_model.mat` |
+| 2 | `Stability_Controllability_State_Feedback_Control.m` | Open-loop stability (eigenvalues of `A`), Jury-criterion cross-check, controllability check, LQR state-feedback gain `K`, closed-loop stability — appends `K` to `system_model.mat` |
+| 3 | `observability.m` | Observability check (rank of `obsv(A,C)`), Luenberger observer gain `L` via pole placement, linear closed-loop observer simulation |
+| 4 | `bifurcation_scan.m` | Sweeps adjustment speed `ω` to locate stable / period-doubling / strongly aperiodic regions of the nonlinear system |
+| 5 | `Nonlinear_simulation.m` | Simulates the true nonlinear system across stable, unstable, and strongly aperiodic regimes; regime-specific relinearisation and controller redesign (`K_unstable`) |
+| 6 | `full_pipeline.m` | Full observer-based closed-loop pipeline on the true nonlinear system: regime-specific observer (`L_unstable`) estimating all four states from price measurements, controller acting only on the estimate |
 
 **Run order:** `equilibrium_linearisation.m` → `Stability_Controllability_State_Feedback_Control.m` → (`observability.m`, `bifurcation_scan.m`, `Nonlinear_simulation.m`, `full_pipeline.m` — these only need `system_model.mat` to already exist; `full_pipeline.m` is self-contained and relinearises independently).
 
